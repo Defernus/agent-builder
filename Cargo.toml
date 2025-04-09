@@ -1,0 +1,49 @@
+[workspace]
+# members = ["crates/*"]
+members = ["crates/*"]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+authors = ["Denis Lavrentev"]
+license = "MIT AND Apache-2.0"
+edition = "2021"
+repository = "https://github.com/defernus/rust-workspace-preset"
+keywords = ["boilerplate", "workspace", "example", "preset"]
+
+[workspace.dependencies]
+rand = "0.9"
+envstruct = "1.0"
+dotenvy = "0.15"
+eyre = "0.6"
+tokio = { version = "1.44", features = ["full"] }
+tracing = "0.1"
+tracing-log = "0.2"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+tracing-error = "0.2"
+log = "0.4"
+color-eyre = "0.6"
+serde = "1.0"
+serde_json = "1.0"
+derive_more = { version = "2.0", features = ["full"] }
+
+# project packages
+node = { version = "0.1.0", path = "./crates/node" }
+init-log = { version = "0.1.0", path = "./crates/init-log" }
+
+[profile.release]
+codegen-units = 1
+debug = false
+debug-assertions = false
+incremental = false
+lto = true
+overflow-checks = true
+opt-level = 3
+panic = "abort"
+rpath = false
+
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 3
